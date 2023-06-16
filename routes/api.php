@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['guest']], function () {
-    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::post('/create_pin', [UserController::class, 'storePin'])->name('user.create.pin');
 });
+
+require __DIR__.'/auth.php';

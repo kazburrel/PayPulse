@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('account_type')->nullable();
             $table->string('gender')->nullable();
             $table->string('employment_status')->nullable();
-            $table->string('t_c')->nullable();
+            // $table->string('t_c')->nullable();
             $table->string('security_question')->nullable();
             $table->string('username')->nullable();
             $table->timestamp('email_verified_at')->nullable();
