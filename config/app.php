@@ -58,7 +58,7 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'frontend_url' => env('FRONTEND_URL', 'http://localhost:3000'),
-
+    'verify_mail_page' => env('FRONTEND_URL', 'http://localhost:3000') . '/verify_email',
     'asset_url' => env('ASSET_URL'),
 
     /*
