@@ -21,7 +21,10 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::post('/create_pin', [UserController::class, 'storePin'])->name('user.create.pin');
+    Route::group(['prefix' => 'pin'], function () {
+        Route::post('/create_pin', [UserController::class, 'storePin'])->name('user.create.pin');
+        Route::post('/update_pin/{pinId}', [UserController::class, 'updatePin'])->name('user.update.pin');
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_pins', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('user_id')->nullable();
+            $table->string('main_pin')->nullable();
+            // $table->string('old_pin')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

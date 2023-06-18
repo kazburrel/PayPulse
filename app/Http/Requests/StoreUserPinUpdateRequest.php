@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserPinRequest extends FormRequest
+class StoreUserPinUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class StoreUserPinRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'main_pin' => ['required', 'confirmed', 'max:4'],
+            'old_pin' => 'required', 'max:4',
+            'main_pin' => 'required', 'max:4',
             'main_pin_confirmation' => 'required',
         ];
     }
