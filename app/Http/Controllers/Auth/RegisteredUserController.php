@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -26,6 +27,8 @@ class RegisteredUserController extends Controller
         // $request->validate([
 
         // ]);
+        $accountNum = mt_rand(1000000000, 9999999999);
+        // dd($accountNum);
         $file = $request->hasFile('id_card') ? $request->file('id_card')->store('user_id_card', 'public') : '';
         $file2 = $request->hasFile('selfie') ? $request->file('selfie')->store('user_selfie', 'public') : '';
         $user = User::create($request->safe()->merge([
@@ -33,6 +36,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => 'user',
+            'account_number' => $accountNum,
             'id_card' => asset('storage/' . $file),
             'selfie' => asset('storage/' . $file2),
         ])->all());

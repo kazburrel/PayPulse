@@ -42,6 +42,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'type',
         'status',
+        'balance',
+        'account_number',
     ];
 
     /**
@@ -63,5 +65,4 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
 }

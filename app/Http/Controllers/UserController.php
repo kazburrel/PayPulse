@@ -49,7 +49,9 @@ class UserController extends Controller
                     'message' => 'Pin confirmation does not match'
                 ]);
             }
-            $pinId->update($request->safe()->merge([])->all());
+            $pinId->update($request->safe()->merge([
+                'main_pin' => Hash::make($request->main_pin),
+            ])->all());
             return response()->json([
                 'message' => 'Pin updated successfully'
             ]);
