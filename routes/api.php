@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\TransactionHistoryController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -37,6 +38,16 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
             Route::post('/bank', [TransferController::class, 'storeExternalTransfer'])->name('user.store.external.transfer');
             Route::get('/bank/{tranId}', [TransferController::class, 'getExtTranDetails'])->name('user.get.external.transfer.details');
         });
+        Route::group(['prefix' => 'international'], function () {
+            Route::post('/bank', [TransferController::class, 'storeInternationalTransfer'])->name('user.store.international.transfer');
+            Route::get('/bank/{tranId}', [TransferController::class, 'getInternationalTranDetails'])->name('user.get.international.transfer.details');
+            Route::post('/confirm/{tranId}', [TransferController::class, 'internationalTransferConfirm'])->name('user.international.bank.transfer.confirm');
+            Route::post('/otp/confirm/{tranId}', [TransferController::class, 'internationalTransferOTPConfirm'])->name('user.international.bank.otp.transfer.confirm');
+        });
+    });
+    Route::group(['prefix' => 'history'], function () {
+        Route::get('/{userId}', [TransactionHistoryController::class, 'getTransactionHistory'])->name('user.get.transfer.history');
+
     });
 });
 
